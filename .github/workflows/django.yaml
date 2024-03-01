@@ -5,13 +5,6 @@ on:
   pull_request:
     branches: [ "*" ]
 
-env:
-  POSTGRES_HOST: localhost
-  POSTGRES_USER: user
-  POSTGRES_PASSWORD: password
-  POSTGRES_DB: starter
-  POSTGRES_PORT: 5432
-
 jobs:
   django-tests:
     runs-on: ubuntu-latest
@@ -19,6 +12,12 @@ jobs:
     defaults:
       run:
         working-directory: ./source
+    env:
+      POSTGRES_HOST: localhost
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: starter
+      POSTGRES_PORT: 5432
     services:
       postgres:
         image: postgres
