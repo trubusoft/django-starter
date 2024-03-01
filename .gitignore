@@ -1,1 +1,3 @@
 .idea
+source/db.sqlite3
+venv
