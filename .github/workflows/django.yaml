@@ -1,0 +1,43 @@
+name: Django tests
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "*" ]
+
+env:
+  POSTGRES_HOST: localhost
+  POSTGRES_USER: user
+  POSTGRES_PASSWORD: password
+  POSTGRES_DB: starter
+  POSTGRES_PORT: 5432
+
+jobs:
+  django-tests:
+    runs-on: ubuntu-latest
+#    container: python:3.11.6
+    defaults:
+      run:
+        working-directory: ./source
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_HOST: ${{ env.POSTGRES_HOST }}
+          POSTGRES_DB: ${{ env.POSTGRES_DB }}
+          POSTGRES_PORT: ${{ env.POSTGRES_PORT }}
+          POSTGRES_USER: ${{ env.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ env.POSTGRES_PASSWORD }}
+        options: >- # Set health checks to wait until postgres has started
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:${{ env.POSTGRES_PORT }}
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+
+      - name: Run Django Tests
+        run: python3 manage.py test --settings=starter.settings_test
