@@ -120,3 +120,8 @@ jobs:
           user_name: 'github-actions[bot]'
           user_email: 'github-actions[bot]@users.noreply.github.com'
           full_commit_message: Update coverage report
+
+      - name: x
+        run: |
+          /usr/bin/git status
+          /usr/bin/git branch
