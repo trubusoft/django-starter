@@ -1,5 +1,5 @@
 .idea
 source/db.sqlite3
-source/htmlcov
+source/z_htmlcov
 source/.coverage
 venv
