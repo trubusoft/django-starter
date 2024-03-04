@@ -1,5 +1,3 @@
-import os
-
 from starter.settings import *
 
 DATABASES = {
