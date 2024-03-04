@@ -99,6 +99,7 @@ jobs:
           coverage run manage.py test --settings=starter.settings_test
           coverage report -m
           coverage html --directory=coverage-report
+          rm coverage-report/.gitignore
 
       - name: Generate Coverage Badge
         uses: tj-actions/coverage-badge-py@v2
