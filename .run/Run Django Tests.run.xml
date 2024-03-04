@@ -25,8 +25,8 @@
       </ENTRIES>
     </EXTENSION>
     <option name="TARGET" value="" />
-    <option name="SETTINGS_FILE" value="$PROJECT_DIR$/source/starter/settings.py" />
-    <option name="CUSTOM_SETTINGS" value="false" />
+    <option name="SETTINGS_FILE" value="$PROJECT_DIR$/source/starter/settings_test.py" />
+    <option name="CUSTOM_SETTINGS" value="true" />
     <option name="USE_OPTIONS" value="false" />
     <option name="OPTIONS" value="" />
     <method v="2" />
