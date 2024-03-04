@@ -104,6 +104,25 @@ jobs:
           overwrite: 'true'
           working-directory: 'source'
 
+      - name: debug
+        run: |
+          pwd
+          ls -l
+          ls -l coverage-report
+          git status
+
+      - name: Commit
+        run: |
+          git add coverage-report
+          git commit -m "Update coverage report"
+
+      - name: debug
+        run: |
+          pwd
+          ls -l
+          ls -l coverage-report
+          git status
+
 #      - name: Delete old coverage branch
 #        uses: dawidd6/action-delete-branch@v3
 #        with:
