@@ -1,0 +1,25 @@
+version: '3.7'
+
+services:
+  web:
+    container_name: django
+    build:
+      context: ./source
+    environment:
+      - DEBUG=False
+      - DJANGO_SETTINGS_MODULE=starter.settings_production
+      - POSTGRES_HOST=database
+    ports:
+    - "8000:8000"
+  database:
+    image: postgres:12.0-alpine
+    volumes:
+      - production_database
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=starter
+    ports:
+    - "5432:5432"
+volumes:
+  production_database:
