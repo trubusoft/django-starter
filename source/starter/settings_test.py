@@ -1,1 +1,1 @@
-
+from starter.settings import *
