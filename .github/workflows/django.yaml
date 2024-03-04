@@ -95,12 +95,12 @@ jobs:
         run: |
           coverage run manage.py test --settings=starter.settings_test
           coverage report -m
-          coverage html
+          coverage html --directory=coverage-report
 
       - name: Generate Coverage Badge
         uses: tj-actions/coverage-badge-py@v2
         with:
-          output: 'z_htmlcov/coverage.svg'
+          output: 'coverage-report/coverage.svg'
           overwrite: 'true'
           working-directory: 'source'
 
@@ -114,7 +114,7 @@ jobs:
       - name: Push coverage data to coverage branch
         uses: peaceiris/actions-gh-pages@v3
         with:
-          publish_dir: ./source/z_htmlcov
+          publish_dir: ./source/coverage-report
           publish_branch: coverage-report
           github_token: ${{ secrets.GITHUB_TOKEN }}
           user_name: 'github-actions[bot]'
