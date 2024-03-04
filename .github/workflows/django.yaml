@@ -115,6 +115,7 @@ jobs:
         run: |
           pwd
           ls -l
+          ls -l coverage-report
 
       - name: Push coverage data to coverage branch
         uses: peaceiris/actions-gh-pages@v3
