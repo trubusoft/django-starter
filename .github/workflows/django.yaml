@@ -112,6 +112,7 @@ jobs:
           pwd
           ls -l
           ls -l coverage-report
+          git add coverage-report/*
           git status
           git branch
           git log
