@@ -2,8 +2,6 @@ name: Django
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "*" ]
 
 env:
   POSTGRES_HOST: localhost
