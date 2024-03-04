@@ -1,0 +1,79 @@
+name: Django
+on:
+  push:
+    branches: [ "main" ]
+
+env:
+  POSTGRES_HOST: localhost
+  POSTGRES_USER: user
+  POSTGRES_PASSWORD: password
+  POSTGRES_DB: starter
+  POSTGRES_PORT: 5432
+
+jobs:
+  coverage-report:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./source
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_HOST: ${{ env.POSTGRES_HOST }}
+          POSTGRES_DB: ${{ env.POSTGRES_DB }}
+          POSTGRES_PORT: ${{ env.POSTGRES_PORT }}
+          POSTGRES_USER: ${{ env.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ env.POSTGRES_PASSWORD }}
+        options: >- # Set health checks to wait until postgres has started
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run Coverage Tests
+        run: |
+          coverage run manage.py test --settings=starter.settings_test
+          coverage report -m
+          coverage html --directory=coverage-report
+          rm coverage-report/.gitignore
+
+      - name: Generate Coverage Badge
+        uses: tj-actions/coverage-badge-py@v2
+        with:
+          output: 'coverage-report/coverage.svg'
+          overwrite: 'true'
+          working-directory: 'source'
+
+      - name: Delete old coverage branch
+        uses: dawidd6/action-delete-branch@v3
+        with:
+          github_token: ${{github.token}}
+          branches: coverage-report
+          soft_fail: true
+
+      - name: Push coverage data to coverage branch
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          publish_dir: ./source/coverage-report
+          publish_branch: coverage-report
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
+          full_commit_message: Update coverage report
+          force_orphan: true
