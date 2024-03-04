@@ -5,6 +5,9 @@ on:
   pull_request:
     branches: [ "*" ]
 
+permissions:
+  contents: write
+
 env:
   POSTGRES_HOST: localhost
   POSTGRES_USER: user
@@ -104,32 +107,26 @@ jobs:
           overwrite: 'true'
           working-directory: 'source'
 
-      - name: debug
-        run: |
-          pwd
-          ls -l
-          ls -l coverage-report
-          git status
-          git branch
-          git logs
+#      - name: debug
+#        run: |
+#          pwd
+#          ls -l
+#          ls -l coverage-report
+#          git status
+#          git branch
+#          git logs
 
-      - name: Commit
-        run: |
-
-          git config --local user.name "github-actions[bot]"
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-
+#      - name: Commit
+#        run: |
+#
+#          git config --local user.name "github-actions[bot]"
+#          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+#
 #          git checkout --orphan coverage-report
+#
+#          git add coverage-report
+#          git commit -m "Update coverage report"
 
-          git add coverage-report
-          git commit -m "Update coverage report"
-
-      - name: debug
-        run: |
-          pwd
-          ls -l
-          ls -l coverage-report
-          git status
 
 #      - name: Delete old coverage branch
 #        uses: dawidd6/action-delete-branch@v3
@@ -138,11 +135,22 @@ jobs:
 #          branches: coverage-report
 #          soft_fail: true
 
-      - name: x
-        run: |
-          pwd
-          ls -l
-          ls -l coverage-report
+
+#      - name: Commit and push coverage result
+#        run: |
+#          git config --local user.name "github-actions[bot]"
+#          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+#
+#          git checkout --orphan coverage-report
+#
+#          git add coverage-report
+#          git commit -m "Update coverage report"
+#
+#      - name: Push changes
+#        uses: ad-m/github-push-action@master
+#        with:
+#          github_token: ${{ secrets.GITHUB_TOKEN }}
+#          branch: refs/heads/coverage-report
 
       - name: Push coverage data to coverage branch
         uses: peaceiris/actions-gh-pages@v3
@@ -154,8 +162,3 @@ jobs:
           user_email: 'github-actions[bot]@users.noreply.github.com'
           full_commit_message: Update coverage report
           force_orphan: true
-
-      - name: x
-        run: |
-          /usr/bin/git status
-          /usr/bin/git branch
