@@ -6,6 +6,7 @@ services:
     build:
       context: ./source
     environment:
+      - DEBUG=False
       - DJANGO_SETTINGS_MODULE=starter.settings_production
       - POSTGRES_HOST=database
     ports:
