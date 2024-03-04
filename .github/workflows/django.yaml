@@ -102,7 +102,6 @@ jobs:
         with:
           output: 'coverage-report/coverage.svg'
           overwrite: 'true'
-          working-directory: 'source'
 
       - name: Delete old coverage branch
         uses: dawidd6/action-delete-branch@v3
