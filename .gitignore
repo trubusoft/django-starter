@@ -1,3 +1,5 @@
 .idea
 source/db.sqlite3
+source/htmlcov
+source/.coverage
 venv
