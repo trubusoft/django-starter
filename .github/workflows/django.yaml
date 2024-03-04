@@ -108,46 +108,12 @@ jobs:
           overwrite: 'true'
           working-directory: 'source'
 
-      - name: debug
-        run: |
-          pwd
-          ls -l
-          ls -l coverage-report
-          git add coverage-report/*
-          git status
-          git branch
-          git log
-
-      - name: Commit
-        run: |
-          git config --local user.name "github-actions[bot]"
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git add coverage-report
-          git commit -m "Update coverage report"
-
 #      - name: Delete old coverage branch
 #        uses: dawidd6/action-delete-branch@v3
 #        with:
 #          github_token: ${{github.token}}
 #          branches: coverage-report
 #          soft_fail: true
-
-
-#      - name: Commit and push coverage result
-#        run: |
-#          git config --local user.name "github-actions[bot]"
-#          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-#
-#          git checkout --orphan coverage-report
-#
-#          git add coverage-report
-#          git commit -m "Update coverage report"
-#
-#      - name: Push changes
-#        uses: ad-m/github-push-action@master
-#        with:
-#          github_token: ${{ secrets.GITHUB_TOKEN }}
-#          branch: refs/heads/coverage-report
 
       - name: Push coverage data to coverage branch
         uses: peaceiris/actions-gh-pages@v3
