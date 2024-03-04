@@ -118,15 +118,10 @@ jobs:
 
       - name: Commit
         run: |
-
           git config --local user.name "github-actions[bot]"
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
-
-#          git checkout --orphan coverage-report
-
           git add coverage-report
           git commit -m "Update coverage report"
-
 
 #      - name: Delete old coverage branch
 #        uses: dawidd6/action-delete-branch@v3
