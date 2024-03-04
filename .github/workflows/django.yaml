@@ -114,7 +114,7 @@ jobs:
           ls -l coverage-report
           git status
           git branch
-          git logs
+          git log
 
       - name: Commit
         run: |
