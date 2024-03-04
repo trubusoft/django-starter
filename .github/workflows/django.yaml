@@ -103,12 +103,12 @@ jobs:
           output: 'coverage-report/coverage.svg'
           overwrite: 'true'
 
-      - name: Delete old coverage branch
-        uses: dawidd6/action-delete-branch@v3
-        with:
-          github_token: ${{github.token}}
-          branches: coverage-report
-          soft_fail: true
+#      - name: Delete old coverage branch
+#        uses: dawidd6/action-delete-branch@v3
+#        with:
+#          github_token: ${{github.token}}
+#          branches: coverage-report
+#          soft_fail: true
 
       - name: x
         run: |
