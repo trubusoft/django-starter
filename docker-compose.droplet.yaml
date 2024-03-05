@@ -10,7 +10,7 @@ services:
       - DJANGO_SETTINGS_MODULE=starter.settings_production
       - POSTGRES_HOST=database
     ports:
-    - "8000:8000"
+    - "80:8000"
   database:
     image: postgres:12.0-alpine
     volumes:
